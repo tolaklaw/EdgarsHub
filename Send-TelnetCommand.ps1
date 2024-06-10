@@ -1,3 +1,7 @@
+# Default parameter bør fungere. 
+# Men det kan være at du må bruke -discard parameter dersom dingsen du forsøker å koble opp til ikke 
+# sender svar tilbake.
+
 param ($ipaddr='192.168.1.110', $port=23, $waittime=500, $message = "c0i4m3n3e", [switch]$discard)
 
 $msg = [System.Text.Encoding]::ASCII.GetBytes($message)
