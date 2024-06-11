@@ -4,7 +4,7 @@ param (
 	$ipaddr='192.168.1.110', 
 	$port=23, 
 	$waittime=500, 
-	$message = "c0i4m3n3e", 	
+	$message = "c0i4m3n3e"
 )
 
 $msg = [System.Text.Encoding]::ASCII.GetBytes($message)

@@ -10,12 +10,13 @@ param (
 try {
 	$c = New-Object System.Net.Sockets.TcpClient($ipaddr, $port)
 	$str = $c.GetStream()
-	$msg = $message
-	foreach ($byt in $msg) {
-		Write-Host "Writing [$byt]"
-		if ($byt -eq 0) {continue; }
+	
+	foreach ($byt in $message) {
+		Write-Host "Writing [$byt]"		
 		$str.Write($byt, 0, 1 )
+
 		Start-Sleep -Milliseconds $waittime
+
 		if ($str.DataAvailable){
 			$buf = New-Object System.Byte[] 4096						
 			$count = $str.Read($buf, 0, 4096)
