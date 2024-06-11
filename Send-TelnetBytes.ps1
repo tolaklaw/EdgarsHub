@@ -6,17 +6,18 @@ param (
 	$ipaddr='192.168.1.110', 
 	$port=23, 
 	$waittime=500, 
-	$message = "c0i4m3n3e", 
-	[switch]$discard
-)
+	[byte[]]$message = @([byte]13,10),
+	[switch]$discard)
 
-$msg = [System.Text.Encoding]::ASCII.GetBytes($message)
 try {
 	$c = New-Object System.Net.Sockets.TcpClient($ipaddr, $port)
 	$str = $c.GetStream()
-
+	#$msg = [System.BitConverter]::GetBytes($message)
+	$msg = $message
 	foreach ($byt in $msg) {
 		Write-Host "Writing byte [$byt]"
+
+		if ($byt -eq 0) {continue; }
 		$str.Write($byt, 0, 1 )
 		$buf = New-Object System.Byte[] 4096
 		if ($discard -eq $false){
